@@ -1,0 +1,66 @@
+<!-- form star -->
+<div class="container">
+    <h1>Add new Star</h1>
+    <div class="row">
+    <form class="col" (ngSubmit)="submit()" #myForm="ngForm">
+        <!-- firstname -->
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" id="firstName" required 
+                 [(ngModel)]="star.firstName" name="firstName" #firstName="ngModel">
+          <!--  validation stuff -->
+          <div [hidden]="firstName.valid || firstName.pristine"
+                 class="alert alert-danger">
+              FirstName is required
+          </div>
+        </div>
+        <!-- lastname -->
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" required
+                [(ngModel)]="star.lastName" name="lastName" #lastName="ngModel">
+                <!--  validation stuff -->
+            <div [hidden]="lastName.valid || firstName.pristine"
+                class="alert alert-danger">
+                LastName is required
+            </div>
+        </div>
+        <!-- url -->
+        <div class="form-group">
+            <label for="image">Image URL</label>
+            <input type="text" class="form-control" id="url"
+                [(ngModel)]="star.picture" name="picture" >
+        </div>
+        <!-- description -->
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea type="text" cols="20" rows="5" class="form-control" id="description"
+                [(ngModel)]="star.description" name="description" >
+            </textarea>
+        </div>
+        <!-- stars -->
+        <div class="form-group">
+            <label for="stars">Stars</label>
+            <select class="form-control" id="stars" [(ngModel)]="star.stars" name="stars">
+              <option *ngFor="let s of [0,1,2,3,5]" [value]="s">{{s}}</option>
+            </select>
+        </div>
+        <!-- submit -->
+        <!-- note : (click)="submit()" is equal to (ngSubmit)  -->
+        <button type="submit" class="btn btn-success" [disabled]="!myForm.form.valid">Submit</button>
+        <button type="submit" class="btn btn-danger" (click)="reset(myForm)">Reset</button>
+  
+      </form>
+    <!-- right side -->
+    <div class="col media jumbotron">
+        
+        <img class="mr-3 not-overflowing" src="{{star.picture}}" alt="{{star.firstName}}">
+        <div class="media-body">
+            <h3 class="mt-0 mb-1">{{star.firstName}} {{star.lastName}}</h3>
+            <h4> Stars : <span class="badge badge-success">{{star.stars}} </span>  </h4>
+            {{star.description}}
+        </div>
+    </div>
+
+    </div>
+</div>
